@@ -25,7 +25,6 @@ body {
   width: 100vw;
 }
 
-/* --- Layout --- */
 .app-container {
   min-height: 100vh;
   padding: 2rem;
@@ -71,7 +70,6 @@ body {
   gap: 1.5rem;
 }
 
-/* --- HUD Panel --- */
 .hud-panel {
   border: 1px solid var(--primary-dim);
   box-shadow: 0 0 15px rgba(0, 243, 255, 0.1);
@@ -114,7 +112,6 @@ body {
   letter-spacing: 0.1em;
 }
 
-/* --- Search Bar --- */
 .search-container {
   margin: 3rem 0;
   position: relative;
@@ -153,7 +150,6 @@ body {
   color: rgba(0, 243, 255, 0.4);
 }
 
-/* --- Todo List --- */
 .todo-form {
   display: flex;
   gap: 0.5rem;
@@ -269,7 +265,6 @@ body {
   letter-spacing: 1px;
 }
 
-/* --- Weather & Clock --- */
 .weather-container {
   display: flex;
   flex-direction: column;
