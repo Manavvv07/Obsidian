@@ -57,7 +57,7 @@ const App = () => {
         </div>
         
         <div className="footer-text">
-          STARK INDUSTRIES © 2024
+          github.com/Manavvv07 © 2025
         </div>
       </div>
     </div>
