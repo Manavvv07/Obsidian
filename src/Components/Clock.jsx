@@ -190,7 +190,6 @@ const Clock = () => {
         zIndex: 10,
         fontSize: "4rem",
         fontWeight: "bold",
-        textShadow: "0 0 25px var(--primary-cyan)",
         fontFamily: "var(--font-main)"
       }}>
         {time.toLocaleTimeString([], { hour12: false })}
