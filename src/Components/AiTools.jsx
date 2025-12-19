@@ -1,12 +1,13 @@
 import { Code } from 'lucide-react';
 import { SiOpenai } from "react-icons/si";
 import { RiGeminiLine, RiClaudeFill } from "react-icons/ri";
+import { DeepSeek } from '@lobehub/icons';
 
 const tools = [
   { name: 'ChatGPT', url: 'https://chat.openai.com', icon: <SiOpenai size={24} /> },
   { name: 'Gemini', url: 'https://gemini.google.com', icon: <RiGeminiLine size={24} /> },
   { name: 'Claude', url: 'https://claude.ai/', icon: <RiClaudeFill size={24} /> },
-  { name: 'DeepSeek', url: 'https://www.deepseek.com/en', icon: <Code size={24} /> }
+  { name: 'DeepSeek', url: 'https://www.deepseek.com/en', icon: <DeepSeek size={24} /> }
 ];
 
 const AiTools = () => {

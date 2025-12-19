@@ -38,18 +38,18 @@ const App = () => {
               <Clock />
             </div>
             
-            <div className="hud-panel" style={{ flex: 0.6 }}>
+            <div className="hud-panel weather-panel" style={{ flex: 0.6 }}>
               <div className="panel-header">ATMOSPHERE</div>
               <Weather />
             </div>
           </div>
 
-          <div className="hud-panel">
+          <div className="hud-panel ai-panel">
             <div className="panel-header">AI TOOLS</div>
             <AiHub />
           </div>
 
-          <div className="hud-panel">
+          <div className="hud-panel task-panel">
             <div className="panel-header">TASKS</div>
             <TodoList />
           </div>
@@ -58,6 +58,9 @@ const App = () => {
         
         <div className="footer-text">
           github.com/Manavvv07 © 2025
+        </div>
+        <div className="footer-text">
+          "Sometimes you gotta run before you can walk"
         </div>
       </div>
     </div>
