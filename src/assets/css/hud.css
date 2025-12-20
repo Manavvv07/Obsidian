@@ -44,13 +44,12 @@ body {
   z-index: 0;
 }
 
-/* UPDATED: Allows full width to push items to the left edges */
 .main-content {
   position: relative;
   z-index: 10;
   width: 100%;
-  max-width: none; /* Removed 1200px limit */
-  padding: 0 2rem; /* Added padding */
+  max-width: none;
+  padding: 0 2rem;
   margin: 0;
   display: flex;
   flex-direction: column;
@@ -58,96 +57,26 @@ body {
   justify-content: center;
 }
 
-/* UPDATED: Left column is 'auto' to wrap content tight, others fill space */
-.dashboard-grid {
-  display: grid;
-  grid-template-columns: auto 1fr 1fr;
-  gap: 3rem;
-  align-self: center;
-  width: 100%;
-  align-items: start; /* Aligns panels to the top of their row */
-}
-
-.panel-column {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-/* UPDATED: Height auto to fit content */
-.hud-panel {
-  border: 1px solid var(--primary-dim);
-  box-shadow: 0 0 15px rgba(0, 243, 255, 0.1);
-  background: var(--panel-bg);
-  backdrop-filter: blur(10px);
-  padding: 1.5rem;
-  border-radius: 12px;
-  transition: all 0.3s ease;
-  display: flex;
-  flex-direction: column;
-  height: auto; 
-}
-
-.hud-panel:hover {
-  border-color: rgba(0, 243, 255, 0.6);
-  box-shadow: 0 0 20px rgba(0, 243, 255, 0.2);
-}
-
-.hud-panel.ai-panel {
-  height: fit-content;
-}
-
-.hud-panel.task-panel {
-  height: fit-content;
-}
-
-/* UPDATED: Reverted absolute positioning so it stays in the grid column */
-.hud-panel.clock-panel {
-  background: transparent;
-  border: none;
-  box-shadow: none;
-  backdrop-filter: none;
-  padding: 0; /* Reduced padding for cleaner alignment */
-  overflow: visible;
-  position: relative;
-  margin-bottom: 2rem;
-  /* Removed top/left/z-index to let grid handle placement */
-}
-
-.hud-panel.clock-panel:hover {
-  box-shadow: none;
-  border-color: transparent;
-}
-
-.panel-header {
-  font-size: 1.1rem;
-  font-weight: bold;
-  text-align: center;
-  margin-bottom: 1rem;
-  border-bottom: 1px solid var(--primary-dim);
-  padding-bottom: 0.5rem;
-  letter-spacing: 0.1em;
-}
-
-/* UPDATED: Width control for search */
+/* --- SEARCH (Moved to Top Center) --- */
+/* UPDATED: Centers the search bar at the top with margin below */
 .search-container {
-  margin: 3rem 0;
-  position: relative;
   width: 100%;
-  max-width: 800px;
-  align-self: center;
+  max-width: 600px;
+  margin: 0 auto 4rem auto; 
+  position: relative;
+  z-index: 30;
 }
 
 .search-wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 7vh;
+  height: 60px;
   width: 100%;
   background: rgba(0, 0, 0, 0.8);
   border: 1px solid var(--primary-cyan);
   border-radius: 50px;
-  padding: 0.8rem 1.5rem;
+  padding: 0 1.5rem;
   box-shadow: 0 0 15px rgba(0, 243, 255, 0.2);
   transition: box-shadow 0.3s ease;
 }
@@ -165,12 +94,142 @@ body {
   font-size: 1.1rem;
   margin-left: 1rem;
   outline: none;
+  text-align: center;
 }
 
 .search-input::placeholder {
   color: rgba(0, 243, 255, 0.4);
 }
 
+/* --- DASHBOARD GRID --- */
+.dashboard-grid {
+  display: grid;
+  margin-top: 40px;
+  margin-bottom: 100px;
+  grid-template-columns: 1fr auto 1fr; 
+  gap: 6rem;
+  align-self: center;
+  width: 100%;
+  align-items: center;
+}
+
+/* Left Column: Align panels to the right (towards center) */
+.dashboard-grid > div:nth-child(1) {
+  align-items: flex-end;
+}
+
+/* Right Column: Align panels to the left (towards center) */
+.dashboard-grid > div:nth-child(3) {
+  align-items: flex-start;
+}
+
+/* Center Column: Holds Clock Only */
+/* UPDATED: Removed gap since search is gone */
+.center-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 20;
+}
+
+.panel-column {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* --- CONNECTING LINES --- */
+
+/* Left Panels -> Line to Right */
+.dashboard-grid > div:nth-child(1) .hud-panel {
+  position: relative;
+}
+
+.dashboard-grid > div:nth-child(1) .hud-panel::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: -6rem;
+  width: 6rem;
+  height: 2px;
+  background: linear-gradient(90deg, var(--primary-cyan) 0%, rgba(0,243,255,0.1) 100%);
+  box-shadow: 0 0 5px var(--primary-dim);
+  z-index: -1;
+}
+
+/* Right Panels -> Line to Left */
+.dashboard-grid > div:nth-child(3) .hud-panel {
+  position: relative;
+}
+
+.dashboard-grid > div:nth-child(3) .hud-panel::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: -6rem;
+  width: 6rem;
+  height: 2px;
+  background: linear-gradient(-90deg, var(--primary-cyan) 0%, rgba(0,243,255,0.1) 100%);
+  box-shadow: 0 0 5px var(--primary-dim);
+  z-index: -1;
+}
+
+/* --- PANELS --- */
+
+.hud-panel {
+  border: 1px solid var(--primary-dim);
+  box-shadow: 0 0 15px rgba(0, 243, 255, 0.1);
+  background: var(--panel-bg);
+  backdrop-filter: blur(10px);
+  padding: 1.5rem;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  width: 100%; 
+  max-width: 400px;
+}
+
+.hud-panel:hover {
+  border-color: rgba(0, 243, 255, 0.6);
+  box-shadow: 0 0 20px rgba(0, 243, 255, 0.2);
+}
+
+.hud-panel.ai-panel,
+.hud-panel.task-panel {
+  height: fit-content;
+}
+
+.hud-panel.clock-panel {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  backdrop-filter: none;
+  padding: 0;
+  overflow: visible;
+  position: relative;
+  margin: 0;
+}
+
+.hud-panel.clock-panel:hover {
+  box-shadow: none;
+  border-color: transparent;
+}
+
+.panel-header {
+  font-size: 1.1rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--primary-dim);
+  padding-bottom: 0.5rem;
+  letter-spacing: 0.1em;
+}
+
+/* --- TASK & FORM STYLES --- */
 .todo-form {
   display: flex;
   gap: 0.5rem;
@@ -208,7 +267,6 @@ body {
   color: black;
 }
 
-/* UPDATED: Removed flex:1 and overflow to fit content height */
 .task-list {
   list-style: none;
   padding: 0;
@@ -251,7 +309,7 @@ body {
   opacity: 1;
 }
 
-/* UPDATED: Height fit content */
+/* --- AI GRID --- */
 .ai-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -286,6 +344,7 @@ body {
   letter-spacing: 1px;
 }
 
+/* --- WEATHER --- */
 .weather-container {
   display: flex;
   flex-direction: column;
@@ -320,9 +379,26 @@ body {
   margin: 10px;
 }
 
+/* --- RESPONSIVE --- */
+@media (max-width: 1200px) {
+  .dashboard-grid {
+    gap: 3rem;
+  }
+}
+
 @media (max-width: 900px) {
   .dashboard-grid {
     grid-template-columns: 1fr;
+    gap: 2rem;
     overflow-y: auto;
+  }
+
+  .center-column {
+    order: -1; 
+  }
+
+  .dashboard-grid > div:nth-child(1),
+  .dashboard-grid > div:nth-child(3) {
+    align-items: stretch; 
   }
 }

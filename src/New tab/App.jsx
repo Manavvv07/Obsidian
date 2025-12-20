@@ -23,45 +23,58 @@ const App = () => {
 
   return (
     <div className="app-container">
+      <div className="app-overlay"></div>
+      
       <div ref={containerRef} className="main-content">
         
+        {/* --- 1. SEARCH BAR (Moved to Top Center) --- */}
         <div className="search-container">
           <SearchBar />
         </div>
 
+        {/* --- 2. DASHBOARD GRID (Columns) --- */}
         <div className="dashboard-grid">
           
-          {/* Left Column: Status */}
+          {/* Left Column: Weather & AI */}
           <div className="panel-column">
-            {/* Clock Panel: Rectangle styles removed via CSS class */}
-            <div className="hud-panel clock-panel" style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <Clock />
-            </div>
-            
-            <div className="hud-panel weather-panel" style={{ flex: 0.6 }}>
+            <div className="hud-panel weather-panel">
               <div className="panel-header">ATMOSPHERE</div>
               <Weather />
             </div>
+            
+            <div className="hud-panel ai-panel">
+              <div className="panel-header">AI TOOLS</div>
+              <AiHub />
+            </div>
           </div>
 
-          <div className="hud-panel ai-panel">
-            <div className="panel-header">AI TOOLS</div>
-            <AiHub />
+          {/* Center Column: Clock Only */}
+          <div className="center-column">
+            <div className="hud-panel clock-panel">
+              <Clock />
+            </div>
           </div>
 
-          <div className="hud-panel task-panel">
-            <div className="panel-header">TASKS</div>
-            <TodoList />
+          {/* Right Column: Tasks */}
+          <div className="panel-column">
+            <div className="hud-panel task-panel">
+              <div className="panel-header">TASKS</div>
+              <TodoList />
+            </div>
           </div>
 
         </div>
         
-        <div className="footer-text">
-          github.com/Manavvv07 © 2025
+        {/* Footers */}
+        <div style={{ marginTop: 'auto', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '5px' }}>
+          <div className="footer-text">
+            github.com/Manavvv07 © 2025
+          </div>
+          <div className="footer-text">
+            "Sometimes you gotta run before you can walk"
+          </div>
         </div>
-        <div className="footer-text">
-          "Sometimes you gotta run before you can walk"
-        </div>
+
       </div>
     </div>
   );
