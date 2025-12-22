@@ -124,46 +124,6 @@ const Clock = () => {
         }}/>
       </div>
 
-      {/* --- Minutes Ticker (Middle) --- */}
-      <div className="ticker-minutes" style={{
-        position: "absolute",
-        inset: 0, 
-        margin: "auto",
-        width: "240px",
-        height: "240px",
-        border: "1px solid rgba(0, 243, 255, 0.15)",
-        borderRadius: "50%",
-        zIndex: 1,
-        pointerEvents: "none"
-      }}>
-        <div style={{
-             position: 'absolute', top: '-10px', left: '50%', transform: 'translateX(-50%)',
-             width: '4px', height: '20px', background: 'rgba(0, 243, 255, 0.8)', 
-             borderRadius: '2px',
-             boxShadow: '0 0 8px rgba(0, 243, 255, 0.5)'
-        }}/>
-      </div>
-
-      {/* --- Hours Ticker (Inner) --- */}
-      <div className="ticker-hours" style={{
-        position: "absolute",
-        inset: 0, 
-        margin: "auto", 
-        width: "180px",
-        height: "180px",
-        border: "1px solid rgba(0, 243, 255, 0.1)",
-        borderRadius: "50%",
-        zIndex: 1,
-        pointerEvents: "none"
-      }}>
-        <div style={{
-             position: 'absolute', top: '-10px', left: '50%', transform: 'translateX(-50%)',
-             width: '6px', height: '25px', background: 'rgba(0, 243, 255, 0.6)', 
-             borderRadius: '3px',
-             boxShadow: '0 0 5px rgba(0, 243, 255, 0.3)'
-        }}/>
-      </div>
-
       {/* Static Decoration Rings */}
       <div style={{
         position: "absolute",
