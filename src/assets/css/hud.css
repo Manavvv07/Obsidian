@@ -56,7 +56,7 @@ body {
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Vertically center content */
+  justify-content: center; 
 }
 
 /* --- SEARCH (Top Center) --- */
@@ -73,6 +73,8 @@ body {
   align-items: center;
   justify-content: center;
   height: 50px;
+  margin-bottom: 20px;
+  margin-top: none;
   width: 100%;
   background: rgba(0, 0, 0, 0.8);
   border: 1px solid var(--primary-cyan);
@@ -106,22 +108,13 @@ body {
 .dashboard-grid {
   display: grid;
   grid-template-columns: 1fr auto 1fr; 
-  gap: 5vw; 
+  gap: 12vw; 
   align-self: center;
   width: 100%;
   align-items: center;
   max-width: 1800px; 
 }
 
-/* Left Column: Align panels to the right (towards center) */
-.dashboard-grid > div:nth-child(1) {
-  align-items: flex-end;
-}
-
-/* Right Column: Align panels to the left (towards center) */
-.dashboard-grid > div:nth-child(3) {
-  align-items: flex-start;
-}
 
 /* Center Column: Holds Clock Only */
 .center-column {
@@ -136,42 +129,63 @@ body {
 .panel-column {
   display: flex;
   flex-direction: column;
-  gap: 3vh; 
+  gap: 8vh; 
 }
 
-/* --- CONNECTING LINES --- */
+/* --- NEW: PANEL WRAPPER & SVG LINES --- */
 
-.dashboard-grid > div:nth-child(1) .hud-panel {
+/* Wrapper to hold the Panel and the sibling SVG Line */
+.panel-wrapper {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 400px; /* Constrain width here instead of .hud-panel */
 }
 
-.dashboard-grid > div:nth-child(1) .hud-panel::after {
-  content: '';
+/* General SVG Overlay Style */
+.circuit-overlay {
   position: absolute;
-  top: 50%;
-  right: -5vw; 
-  width: 5vw;
-  height: 2px;
-  background: linear-gradient(90deg, var(--primary-cyan) 0%, rgba(0,243,255,0.1) 100%);
-  box-shadow: 0 0 5px var(--primary-dim);
-  z-index: -1;
+  overflow: visible; /* Allows glowing dots/lines to draw outside bounds */
+  pointer-events: none; /* Clicks pass through */
+  z-index: 1; /* Behind the panel (visually handled by panel z-index) */
 }
 
-/* Right Panels -> Line to Left */
-.dashboard-grid > div:nth-child(3) .hud-panel {
-  position: relative;
+/* 1. Weather Connector (Top Left -> Down/Right) */
+.weather-connector {
+  top: 50%;
+  left: 100%; /* Starts at right edge of wrapper */
+  width: 5vw; /* Matches grid gap */
+  height: 12vh; /* Vertical drop distance */
 }
 
-.dashboard-grid > div:nth-child(3) .hud-panel::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: -5vw;
+/* 2. AI Connector (Bottom Left -> Up/Right) */
+.ai-connector {
+  bottom: 50%;
+  left: 100%; /* Starts at right edge of wrapper */
   width: 5vw;
-  height: 2px;
-  background: linear-gradient(-90deg, var(--primary-cyan) 0%, rgba(0,243,255,0.1) 100%);
-  box-shadow: 0 0 5px var(--primary-dim);
-  z-index: -1;
+  height: 12vh;
+}
+
+/* 3. Tasks Connector (Right -> Left) */
+.tasks-connector {
+  top: 50%;
+  right: 100%; /* Starts at left edge of wrapper */
+  width: 5vw;
+  height: 20px; /* Short height for straight line */
+  transform: translateY(-50%);
+}
+
+/* Pulse Animation for the Dots */
+.connection-dot {
+  animation: pulse-dot 2s infinite ease-in-out;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 0.6; r: 3px; }
+  50% { opacity: 1; r: 5px; }
 }
 
 /* --- PANELS --- */
@@ -188,7 +202,9 @@ body {
   flex-direction: column;
   height: auto;
   width: 100%; 
-  max-width: 400px;
+  /* Position relative + z-index ensures panel sits ON TOP of the SVG lines */
+  position: relative; 
+  z-index: 2;
 }
 
 .hud-panel:hover {
@@ -210,6 +226,7 @@ body {
   overflow: visible;
   position: relative;
   margin: 0;
+  z-index: 2;
 }
 
 .hud-panel.clock-panel:hover {
@@ -227,6 +244,7 @@ body {
   letter-spacing: 0.1em;
 }
 
+/* --- FORM & TASKS --- */
 .todo-form {
   display: flex;
   gap: 0.5rem;
@@ -306,6 +324,7 @@ body {
   opacity: 1;
 }
 
+/* --- AI GRID --- */
 .ai-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -340,6 +359,7 @@ body {
   letter-spacing: 1px;
 }
 
+/* --- WEATHER --- */
 .weather-container {
   display: flex;
   flex-direction: column;
@@ -367,10 +387,13 @@ body {
   font-weight: 800;
 }
 
+/* --- FOOTER --- */
 .footer-text {
   font-size: 0.8rem;
   opacity: 0.7;
 }
+
+/* --- MEDIA QUERIES --- */
 
 @media (max-height: 850px) {
   .app-container {
@@ -408,8 +431,8 @@ body {
     transform: none; 
   }
   
-  .dashboard-grid > div:nth-child(1) .hud-panel::after,
-  .dashboard-grid > div:nth-child(3) .hud-panel::before {
+  /* Hide SVG connectors on mobile */
+  .circuit-overlay {
     display: none;
   }
 
