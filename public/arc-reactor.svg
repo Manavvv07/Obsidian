@@ -1,0 +1,71 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="centerGlow" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+      <stop offset="20%" style="stop-color:#aaddff;stop-opacity:1" />
+      <stop offset="40%" style="stop-color:#00eaff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#00334d;stop-opacity:1" />
+    </radialGradient>
+    
+    <linearGradient id="metalGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a1a;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#4d4d4d;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0d0d0d;stop-opacity:1" />
+    </linearGradient>
+
+    <linearGradient id="copperGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#3e1e1e" />
+      <stop offset="20%" style="stop-color:#8b4513" />
+      <stop offset="40%" style="stop-color:#cd7f32" /> <stop offset="60%" style="stop-color:#8b4513" />
+      <stop offset="80%" style="stop-color:#5a2d0c" />
+      <stop offset="100%" style="stop-color:#2a1208" />
+    </linearGradient>
+
+    <filter id="glowBlur" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <g id="coilSegment">
+      <rect x="-25" y="-210" width="50" height="60" rx="5" fill="url(#copperGradient)" stroke="#111" stroke-width="2" />
+      <path d="M-25 -205 H25 M-25 -200 H25 M-25 -195 H25 M-25 -190 H25 M-25 -185 H25 M-25 -180 H25 M-25 -175 H25 M-25 -170 H25 M-25 -165 H25 M-25 -160 H25" stroke="#000" stroke-opacity="0.3" stroke-width="1" />
+    </g>
+  </defs>
+
+  <circle cx="256" cy="256" r="210" fill="#051a24" stroke="#000" stroke-width="5"/>
+
+  <circle cx="256" cy="256" r="185" fill="none" stroke="#00ccff" stroke-width="40" opacity="0.6" filter="url(#glowBlur)" />
+
+  <g transform="translate(256, 256)">
+    <use href="#coilSegment" transform="rotate(0)" />
+    <use href="#coilSegment" transform="rotate(36)" />
+    <use href="#coilSegment" transform="rotate(72)" />
+    <use href="#coilSegment" transform="rotate(108)" />
+    <use href="#coilSegment" transform="rotate(144)" />
+    <use href="#coilSegment" transform="rotate(180)" />
+    <use href="#coilSegment" transform="rotate(216)" />
+    <use href="#coilSegment" transform="rotate(252)" />
+    <use href="#coilSegment" transform="rotate(288)" />
+    <use href="#coilSegment" transform="rotate(324)" />
+  </g>
+
+  <circle cx="256" cy="256" r="145" fill="#0d1117" stroke="#333" stroke-width="2"/>
+
+  <circle cx="256" cy="256" r="125" fill="none" stroke="#00eaff" stroke-width="20" stroke-dasharray="15 63.5" stroke-dashoffset="37" filter="url(#glowBlur)" opacity="0.9" />
+  
+  <circle cx="256" cy="256" r="115" fill="none" stroke="#005566" stroke-width="2"/>
+  <circle cx="256" cy="256" r="135" fill="none" stroke="#005566" stroke-width="2"/>
+
+  <circle cx="256" cy="256" r="90" fill="#080f14" stroke="#00eaff" stroke-width="3" />
+  
+  <circle cx="256" cy="256" r="75" fill="none" stroke="#006677" stroke-width="10" />
+  <circle cx="256" cy="256" r="60" fill="none" stroke="#00eaff" stroke-width="2" opacity="0.8" />
+  
+  <circle cx="256" cy="256" r="50" fill="url(#centerGlow)" filter="url(#glowBlur)" />
+  
+  <path d="M256 220 L270 240 L256 280 L242 240 Z" fill="white" opacity="0.4" filter="url(#glowBlur)" />
+
+</svg>

@@ -6,10 +6,30 @@
   --bg-dark: #000000;
   --panel-bg: rgba(5, 10, 15, 0.85);
   --font-main: 'Orbitron', sans-serif;
+
+  /* Cross-Browser Text Rendering Optimization */
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
 }
 
-* {
+/* Universal Box Sizing & Reset */
+*, *::before, *::after {
   box-sizing: border-box;
+}
+
+/* Responsive Media Defaults */
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Form Element Inheritance */
+input, button, textarea, select {
+  font: inherit;
 }
 
 body {
@@ -17,10 +37,15 @@ body {
   background-color: var(--bg-dark);
   color: var(--primary-cyan);
   font-family: var(--font-main);
-  /* PREVENT SCROLLING on Desktop */
+  
+  /* Desktop: Prevent scrolling by default */
   overflow: hidden; 
-  height: 100vh;
-  width: 100vw;
+  
+  /* Dimensions with Fallbacks */
+  width: 100%;
+  height: 100vh;      /* Fallback for older browsers */
+  height: 100dvh;     /* Modern mobile browser support */
+  min-width: 320px;   /* Prevents layout break on very small phones */
 }
 
 #root {
@@ -29,16 +54,17 @@ body {
   align-items: center;
   height: 100%;
   width: 100%;
+  isolation: isolate; /* Creates a new stacking context */
 }
 
 .app-container {
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
   padding: 2vh 2vw;
   display: flex;
   flex-direction: column;
   position: relative;
-  overflow: hidden;
+  overflow: hidden; /* Matches body */
 }
 
 .app-overlay {
@@ -68,13 +94,23 @@ body {
   z-index: 30;
 }
 
+body.is-edge .search-container{
+  max-width: 900px;
+}
+
+body.is-edge .search-wrapper{
+  max-width: 900px;
+  width: 100%;
+  height: 70px;
+  margin-bottom: 20px;
+}
+
 .search-wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
   height: 50px;
   margin-bottom: 20px;
-  margin-top: none;
   width: 100%;
   background: rgba(0, 0, 0, 0.8);
   border: 1px solid var(--primary-cyan);
@@ -98,6 +134,11 @@ body {
   margin-left: 1rem;
   outline: none;
   text-align: center;
+  min-width: 0; /* Fix flexbox overflow issues */
+}
+
+body.is-edge .search-input{
+  font-size: 1.3rem;
 }
 
 .search-input::placeholder {
@@ -115,6 +156,9 @@ body {
   max-width: 1800px; 
 }
 
+body.is-edge .dashboard-grid{
+  gap: 5vw;
+}
 
 /* Center Column: Holds Clock Only */
 .center-column {
@@ -129,40 +173,39 @@ body {
 .panel-column {
   display: flex;
   flex-direction: column;
-  gap: 8vh; 
+  gap: 5vh; 
 }
 
-/* --- NEW: PANEL WRAPPER & SVG LINES --- */
-
-/* Wrapper to hold the Panel and the sibling SVG Line */
+/* --- PANEL WRAPPER & SVG LINES --- */
 .panel-wrapper {
   position: relative;
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 400px; /* Constrain width here instead of .hud-panel */
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-/* General SVG Overlay Style */
 .circuit-overlay {
   position: absolute;
-  overflow: visible; /* Allows glowing dots/lines to draw outside bounds */
-  pointer-events: none; /* Clicks pass through */
-  z-index: 1; /* Behind the panel (visually handled by panel z-index) */
+  overflow: visible;
+  pointer-events: none;
+  z-index: 1;
 }
 
 /* 1. Weather Connector (Top Left -> Down/Right) */
 .weather-connector {
   top: 50%;
-  left: 100%; /* Starts at right edge of wrapper */
-  width: 5vw; /* Matches grid gap */
-  height: 12vh; /* Vertical drop distance */
+  left: 100%; 
+  width: 5vw; 
+  height: 12vh;
 }
 
 /* 2. AI Connector (Bottom Left -> Up/Right) */
 .ai-connector {
   bottom: 50%;
-  left: 100%; /* Starts at right edge of wrapper */
+  left: 100%;
   width: 5vw;
   height: 12vh;
 }
@@ -170,13 +213,12 @@ body {
 /* 3. Tasks Connector (Right -> Left) */
 .tasks-connector {
   top: 50%;
-  right: 100%; /* Starts at left edge of wrapper */
+  right: 100%;
   width: 5vw;
-  height: 20px; /* Short height for straight line */
+  height: 20px;
   transform: translateY(-50%);
 }
 
-/* Pulse Animation for the Dots */
 .connection-dot {
   animation: pulse-dot 2s infinite ease-in-out;
   transform-box: fill-box;
@@ -189,7 +231,6 @@ body {
 }
 
 /* --- PANELS --- */
-
 .hud-panel {
   border: 1px solid var(--primary-dim);
   box-shadow: 0 0 15px rgba(0, 243, 255, 0.1);
@@ -202,7 +243,6 @@ body {
   flex-direction: column;
   height: auto;
   width: 100%; 
-  /* Position relative + z-index ensures panel sits ON TOP of the SVG lines */
   position: relative; 
   z-index: 2;
 }
@@ -226,7 +266,7 @@ body {
   overflow: visible;
   position: relative;
   margin: 0;
-  z-index: 2;
+  z-index: 2; 
 }
 
 .hud-panel.clock-panel:hover {
@@ -259,6 +299,7 @@ body {
   padding: 0.5rem;
   font-family: monospace;
   outline: none;
+  min-width: 0;
 }
 
 .todo-input:focus {
@@ -275,6 +316,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
 }
 
 .icon-btn:hover {
@@ -286,6 +328,8 @@ body {
   list-style: none;
   padding: 0;
   margin: 0;
+  max-height: 200px;
+  overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: var(--primary-cyan) transparent;
 }
@@ -305,6 +349,7 @@ body {
   flex: 1;
   font-size: 0.9rem;
   font-family: monospace;
+  word-break: break-word; /* Prevents long text from breaking layout */
 }
 
 .task-completed {
@@ -318,6 +363,7 @@ body {
   color: #ff4444;
   cursor: pointer;
   opacity: 0.6;
+  flex-shrink: 0;
 }
 
 .delete-btn:hover {
@@ -371,7 +417,7 @@ body {
 }
 
 .temp-display {
-  font-size: 2.5rem;
+  font-size: clamp(2rem, 4vw, 2.5rem); /* Responsive font size */
   font-weight: bold;
   text-shadow: 0 0 10px var(--primary-cyan);
 }
@@ -383,7 +429,7 @@ body {
 }
 
 .weather-container .detail-row .location {
-  font-size: 24px;
+  font-size: clamp(1rem, 2vw, 24px);
   font-weight: 800;
 }
 
@@ -393,15 +439,16 @@ body {
   opacity: 0.7;
 }
 
-/* --- MEDIA QUERIES --- */
+/* --- MEDIA QUERIES (High DPI / Mobile / Tablet) --- */
 
-@media (max-height: 850px) {
+/* Small Laptop / Tablet Landscape */
+@media (max-height: 850px), (max-width: 1200px) {
   .app-container {
     padding: 1vh 2vw;
   }
   
   .dashboard-grid {
-    transform: scale(0.85); 
+    transform: scale(0.9);
     gap: 3vw;
   }
 
@@ -414,21 +461,36 @@ body {
   }
 }
 
+/* Mobile & Tablet Portrait */
 @media (max-width: 900px) {
   body {
     overflow-y: auto;
+    height: auto;
+    min-height: 100dvh;
   }
   
   .app-container {
     height: auto;
+    min-height: 100dvh;
     overflow-y: visible;
-    padding: 2rem;
+    padding: 2rem 1rem;
+  }
+
+  .main-content {
+    height: auto;
+    justify-content: flex-start;
   }
 
   .dashboard-grid {
     grid-template-columns: 1fr;
     gap: 2rem;
     transform: none; 
+    width: 100%;
+    margin-top: 1rem;
+  }
+  
+  .panel-column {
+    gap: 2rem;
   }
   
   /* Hide SVG connectors on mobile */
@@ -442,6 +504,10 @@ body {
 
   .dashboard-grid > div:nth-child(1),
   .dashboard-grid > div:nth-child(3) {
-    align-items: stretch;
+    align-items: center; 
   }
-}
+
+  .panel-wrapper {
+    width: 100%;
+    max-width: 100%; }
+  }

@@ -82,7 +82,7 @@ const App = () => {
           {/* --- CENTER COLUMN --- */}
           <div className="center-column">
             <div className="hud-panel clock-panel">
-              <Clock />
+              <Clock className="clock-component"/>
             </div>
           </div>
 
@@ -95,10 +95,10 @@ const App = () => {
                 <div className="panel-header">TASKS</div>
                 <TodoList />
               </div>
-              <svg className="circuit-overlay tasks-connector" width="100%" height="100%">
+              <svg className="circuit-overlay tasks-connector" width="120%" height="100%">
                 <line 
                   x1="100%" y1="50%" 
-                  x2="0%" y2="50%" 
+                  x2="-190%" y2="50%" 
                   stroke={strokeColor} 
                   strokeWidth="2" 
                 />
