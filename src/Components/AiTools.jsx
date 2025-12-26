@@ -1,4 +1,3 @@
-import { Code } from 'lucide-react';
 import { SiOpenai } from "react-icons/si";
 import { RiGeminiLine, RiClaudeFill } from "react-icons/ri";
 import { DeepSeek } from '@lobehub/icons';

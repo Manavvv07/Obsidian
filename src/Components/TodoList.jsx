@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Trash2, Plus, CheckSquare, Square } from 'lucide-react';
 import { animate } from "animejs";
 
@@ -22,15 +22,13 @@ const TodoList = () => {
     setTasks([...tasks, newTask]);
     setInputValue('');
 
-    // Wait for render, then animate the new list item
     setTimeout(() => {
         if (listRef.current?.lastChild) {
-            // Anime.js v4 Syntax: animate(target, params)
             animate(listRef.current.lastChild, {
                 translateX: [-20, 0],
                 opacity: [0, 1],
                 duration: 400,
-                ease: 'outQuad' // 'easing' is renamed to 'ease' in v4
+                ease: 'outQuad' 
             });
         }
     }, 10);

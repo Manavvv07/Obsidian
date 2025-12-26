@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Cloud, Sun, Wind, Droplets, Loader, MapPin } from "lucide-react";
 import { animate } from "animejs";
-import { FaLocationCrosshairs } from "react-icons/fa6";
 
 const Weather = () => {
   const [weather, setWeather] = useState(null);

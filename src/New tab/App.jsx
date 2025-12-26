@@ -21,7 +21,6 @@ const App = () => {
     }
   }, []);
 
-  // Theme Colors
   const strokeColor = "rgba(0, 243, 255, 0.3)";
   const dotColor = "#00f3ff";
 
@@ -31,23 +30,19 @@ const App = () => {
       
       <div ref={containerRef} className="main-content">
         
-        {/* Search Bar */}
         <div className="search-container">
           <SearchBar />
         </div>
 
         <div className="dashboard-grid">
           
-          {/* --- LEFT COLUMN --- */}
           <div className="panel-column">
             
-            {/* WRAPPER 1: Weather + Line */}
             <div className="panel-wrapper">
               <div className="hud-panel weather-panel">
                 <div className="panel-header">ATMOSPHERE</div>
                 <Weather />
               </div>
-              {/* UPDATED: Path goes 40% Right, then Angles Down to Clock */}
               <svg className="circuit-overlay weather-connector" viewBox="0 0 100 100" preserveAspectRatio="none">
                 <path 
                   d="M0,2 L170,2 L250,100" 
@@ -59,13 +54,11 @@ const App = () => {
               </svg>
             </div>
             
-            {/* WRAPPER 2: AI + Line */}
             <div className="panel-wrapper">
               <div className="hud-panel ai-panel">
                 <div className="panel-header">AI TOOLS</div>
                 <AiHub />
               </div>
-              {/* UPDATED: Path goes 40% Right, then Angles Up to Clock */}
               <svg className="circuit-overlay ai-connector" viewBox="0 0 100 100" preserveAspectRatio="none">
                 <path 
                   d="M0,98 L170,98 L250,0" 
@@ -79,17 +72,14 @@ const App = () => {
 
           </div>
 
-          {/* --- CENTER COLUMN --- */}
           <div className="center-column">
             <div className="hud-panel clock-panel">
               <Clock className="clock-component"/>
             </div>
           </div>
 
-          {/* --- RIGHT COLUMN --- */}
           <div className="panel-column">
             
-            {/* WRAPPER 3: Tasks + Line */}
             <div className="panel-wrapper">
               <div className="hud-panel task-panel">
                 <div className="panel-header">TASKS</div>
@@ -109,7 +99,6 @@ const App = () => {
 
         </div>
         
-        {/* Footers */}
         <div className="footer-container" style={{ position: 'fixed', bottom: '10px', width: '100%', textAlign: 'center', pointerEvents: 'none', zIndex: 0 }}>
           <div className="footer-text">github.com/Manavvv07 © 2025</div>
           <div className="footer-text">"Sometimes you gotta run before you can walk"</div>
