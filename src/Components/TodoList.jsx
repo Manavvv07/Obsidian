@@ -22,14 +22,15 @@ const TodoList = () => {
     setTasks([...tasks, newTask]);
     setInputValue('');
 
+    // Wait for render, then animate the new list item
     setTimeout(() => {
         if (listRef.current?.lastChild) {
-            anime({
-                targets: listRef.current.lastChild,
+            // Anime.js v4 Syntax: animate(target, params)
+            animate(listRef.current.lastChild, {
                 translateX: [-20, 0],
                 opacity: [0, 1],
                 duration: 400,
-                easing: 'easeOutQuad'
+                ease: 'outQuad' // 'easing' is renamed to 'ease' in v4
             });
         }
     }, 10);

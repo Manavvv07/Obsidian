@@ -25,31 +25,37 @@ const Clock = () => {
     const startHourRotation = (currentHours * 30) + (currentMinutes * 0.5);
     const waveStartDelay = currentSeconds * (1000 / 60);
 
+    // Anime.js v4 Timeline
     const tl = createTimeline({
       loop: true,
       autoplay: true
     });
 
+    // 1. Ticks Animation
+    // v4 uses `keyframes` for multi-stage properties
     tl.add('.tick', {
-      translateY: [
-        { to: '-10px', duration: 150, ease: 'outQuad' },
-        { to: '0px', duration: 400, ease: 'outElastic(1, .5)' }
+      keyframes: [
+        { translateY: '-10px', duration: 150, ease: 'outQuad' },
+        { translateY: '0px', duration: 400, ease: 'outElastic(1, .5)' }
       ],
       delay: stagger(1000 / 60, { start: waveStartDelay })
     }, 0);
 
+    // 2. Seconds Hand
     tl.add('.ticker-seconds', {
       rotate: [startSecondRotation + 'deg', (startSecondRotation + 360) + 'deg'],
       duration: 60000,
       ease: 'linear'
     }, 0);
 
+    // 3. Minutes Hand
     tl.add('.ticker-minutes', {
       rotate: [startMinuteRotation + 'deg', (startMinuteRotation + 360) + 'deg'],
       duration: 3600000,
       ease: 'linear'
     }, 0);
 
+    // 4. Hours Hand
     tl.add('.ticker-hours', {
       rotate: [startHourRotation + 'deg', (startHourRotation + 360) + 'deg'],
       duration: 43200000,
